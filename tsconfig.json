@@ -1,0 +1,17 @@
+{
+ "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "removeComments": true,
+        "experimentalDecorators": true,
+        "noEmitHelpers": true,
+        "declaration": true
+    },
+    "files": [
+      "node_modules/tns-core-modules/tns-core-modules.d.ts",
+      "cameraview-common.ts",
+      "cameraview.android.ts",
+      "cameraview.ios.ts"
+    ],
+    "compileOnSave": false
+}
