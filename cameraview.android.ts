@@ -1,5 +1,6 @@
 import * as common from "./cameraview-common";
 import { View } from "ui/core/view";
+import * as application from "application";
 
 declare var com, android;
 global.moduleMerge(common, exports);
@@ -7,6 +8,7 @@ export class CameraView extends common.CameraView {
     private _android;
     get android(): any {
         return this._android;
+
     }
 
     get _nativeView(): any {
@@ -16,10 +18,12 @@ export class CameraView extends common.CameraView {
     private camera;
 
     public _createUI() {
+        application.on(application.orientationChangedEvent, this.onOrientationChanged, this);
         this._android = new android.view.TextureView(this._context);
         this._android.setSurfaceTextureListener(new android.view.TextureView.SurfaceTextureListener({
             onSurfaceTextureAvailable: (surface, width, height) => {
                 this.camera = android.hardware.Camera.open();
+                this.camera.setDisplayOrientation(90);
                 this.camera.setPreviewTexture(surface);
                 this.camera.startPreview();
             },
@@ -33,6 +37,16 @@ export class CameraView extends common.CameraView {
             onSurfaceTextureUpdated: (surface) => {
             }
         }));
+    }
+
+    private onOrientationChanged(args: application.OrientationChangedEventData) {
+        var orientation = args.newValue;
+
+    }
+
+    public onUnloaded() {
+        super.onUnloaded();
+        //application.off(application.orientationChangedEvent, this.onOrientationChanged);
     }
 
     // public onSurfaceTextureAvailable(surface, width, height) {
