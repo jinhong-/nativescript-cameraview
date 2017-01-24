@@ -4,7 +4,7 @@ global.moduleMerge(common, exports);
 var CameraView = (function (_super) {
     __extends(CameraView, _super);
     function CameraView() {
-        _super.apply(this, arguments);
+        return _super !== null && _super.apply(this, arguments) || this;
     }
     return CameraView;
 }(common.CameraView));
